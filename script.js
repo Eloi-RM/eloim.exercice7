@@ -9,6 +9,7 @@ const gameOverTitle = document.querySelector(".game-over-title")
 const inputField = document.querySelector(".input-matches")
 const matchesIndicator = document.querySelector(".matches-left-para")
 const validateButton = document.querySelector(".validate-button")
+const matchesContainer = document.querySelector(".matches-container")
 //-----------------------
 
 const initialMatches = 50
@@ -19,6 +20,7 @@ let playerTotalNumber = 0
 function game(){
     draw("turn")
     hide("game")
+    matchesDisplay()
 }
 
 function gameloop(){
@@ -61,7 +63,7 @@ function switchPlayer(){
     }
 }
 
-playersValidateButton.addEventListener('click',()=>{
+playersValidateButton.addEventListener('click', ()=>{
     playerTotalNumber = inputPlayers.value
     if (playerTotalNumber > 1){
         hide("menu")
@@ -104,6 +106,18 @@ function hide(ui){
                 child.style.display = "none"
             }
         break
+    }
+}
+
+function matchesDisplay(){
+    for(let i = 0; i <= 50; i++){
+        const match = document.createElement("button")
+        match.classList.add("match")
+        match.innerHTML = '<img src="match_sprite.png"/>'
+        match.addEventListener('click', ()=>{
+            match.classList.add("selected")
+        })
+        matchesContainer.appendChild(match)
     }
 }
 

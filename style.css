@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+
+.matches-container {
+    gap: 5px;
+    width: 50vh;
+}
+
+.match-sprite {
+    height: 100px;
+    width: 25px;
+}
+
+.match {
+    height: 100px;
+    width: 25px;
+    background-color: white;
+    transition: all, 0.1s;
+    &.picked{
+        display: none;
+    }
+}
+
+.match:hover {
+    transform: translate(0, -3px);
+    filter: brightness(90%);
+}
+
+.match:disabled {
+    background-color: grey;
+}
+

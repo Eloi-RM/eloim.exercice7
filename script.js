@@ -10,12 +10,16 @@ const inputField = document.querySelector(".input-matches")
 const matchesIndicator = document.querySelector(".matches-left-para")
 const validateButton = document.querySelector(".validate-button")
 const matchesContainer = document.querySelector(".matches-container")
+const matchesPickedPara = document.querySelector(".matches-picked-para")
+const
 //-----------------------
 
 const initialMatches = 50
 let totalMatches = initialMatches
 let playerNumber = 1
 let playerTotalNumber = 0
+
+let matchesAmmo = 0
 
 function game(){
     draw("turn")
@@ -45,6 +49,13 @@ function askPlayer(){
 
 function retractMatches(matches){
     totalMatches -= matches
+    matchesAmmo ++
+    if (matchesAmmo == 6){
+        switchPlayer()
+        draw("turn")
+        matchesAmmo = 0
+    }
+    draw("matches")
 }
 
 function checkWin(){
@@ -78,6 +89,7 @@ function draw(element){
         break
         case "matches":
             matchesIndicator.innerText = `There is ${totalMatches} matches left`
+            matchesPickedPara.innerText = `You picked ${matchesAmmo} matches`
         break
         case "gameOver":
             gameOverTitle.innerText = `Player ${playerNumber} lose`
@@ -110,15 +122,18 @@ function hide(ui){
 }
 
 function matchesDisplay(){
-    for(let i = 0; i <= 50; i++){
+    for(let i = 0; i < 50; i++){
         const match = document.createElement("button")
         match.classList.add("match")
-        match.innerHTML = '<img src="match_sprite.png"/>'
+        match.innerHTML = '<img class="match-sprite" src="match_sprite.png"/>'
         match.addEventListener('click', ()=>{
-            match.classList.add("selected")
+            match.classList.add('picked')
+            retractMatches(1)
         })
         matchesContainer.appendChild(match)
     }
 }
+
+addEventListener
 
 game()

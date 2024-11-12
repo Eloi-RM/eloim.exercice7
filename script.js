@@ -1,7 +1,12 @@
 //----------DOM----------
+const menuUI = document.querySelector(".menu-ui")
+const inputPlayers = document.querySelector(".input-players")
+const playersValidateButton = document.querySelector(".players-validate-button")
+
+const gameUI = document.querySelector(".game-ui")
 const turnIndicator = document.querySelector(".turn-indicator-title")
 const gameOverTitle = document.querySelector(".game-over-title")
-const inputField = document.querySelector(".input")
+const inputField = document.querySelector(".input-matches")
 const matchesIndicator = document.querySelector(".matches-left-para")
 const validateButton = document.querySelector(".validate-button")
 //-----------------------
@@ -12,8 +17,8 @@ let playerNumber = 1
 let playerTotalNumber = 0
 
 function game(){
-    askHowManyPlayers()
     draw("turn")
+    hide("game")
 }
 
 function gameloop(){
@@ -56,11 +61,12 @@ function switchPlayer(){
     }
 }
 
-function askHowManyPlayers(){
-    while (playerTotalNumber <= 0){
-        playerTotalNumber = prompt("How many people are playing?")
+playersValidateButton.addEventListener('click',()=>{
+    playerTotalNumber = inputPlayers.value
+    if (playerTotalNumber > 1){
+        hide("menu")
     }
-}
+})
 
 function draw(element){
 
@@ -75,6 +81,28 @@ function draw(element){
             gameOverTitle.innerText = `Player ${playerNumber} lose`
         break
         default:
+        break
+    }
+}
+
+function hide(ui){
+    switch (ui){
+        case "menu":
+            for(const child of menuUI.children){
+                child.style.display = "none"
+            }
+            for(const child of gameUI.children){
+                child.style.display = "flex"
+            }
+        break
+
+        case "game":
+            for(const child of menuUI.children){
+                child.style.display = "flex"
+            }
+            for(const child of gameUI.children){
+                child.style.display = "none"
+            }
         break
     }
 }

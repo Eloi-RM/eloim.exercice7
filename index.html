@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Matches Game</title>
     <script defer src="script.js"></script>
 </head>
 <body>
     <header></header>
     <main class="game-container">
-        <h1 class="turn-indicator-title">Player 0</h1>
-        <input class="input" type="number"/>
-        <button class="validate-button">Validate</button>
-        <p class="matches-left-para">50 matches left</p>
-        <h2 class="game-over-title"></h2>
+        <div class="menu-ui">
+            <p>Number of players :</p>
+            <input class="input-players" type="number"/>
+            <button class="players-validate-button">Validate</button>
+        </div>
+        
+        <div class="game-ui">   
+            <h1 class="turn-indicator-title">Player 0</h1>
+            <input class="input-matches" type="number"/>
+            <button class="validate-button">Validate</button>
+            <p class="matches-left-para">50 matches left</p>
+            <h2 class="game-over-title"></h2>
+        </div> 
     </main>
     <footer></footer>
 </body>

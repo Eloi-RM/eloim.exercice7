@@ -5,13 +5,18 @@
     border: none;
 }
 
+body {
+    font-family:fantasy;
+}
+
 header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     font-size: xx-large;
+    color: firebrick;
 }
 
 .game-container {
@@ -26,7 +31,11 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 20px;
+    font-size: large;
+    border: solid firebrick;
+    padding: 20px;
+    border-radius: 20%;
 }
 
 .game-ui {
@@ -37,8 +46,15 @@ header {
 }
 
 .matches-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+    align-items: center;
     gap: 5px;
     width: 50vh;
+    border: solid firebrick;
+    padding: 5px;
+    margin-left: 70px;
 }
 
 .match-sprite {
@@ -67,4 +83,41 @@ header {
 
 .input-players {
     width: 30px;
+}
+
+.ui-button {
+    background-color: indianred;
+    border: solid firebrick;
+    color: white;
+    padding: 5px;
+    border-radius: 20%;
+    transition: all, 0.2s;
+    height: 30px;
+    width: 70px;
+}
+
+.ui-button:hover:enabled {
+    transform: translate(0, -3px);
+    filter: brightness(90%);
+}
+
+.ui-button:disabled {
+    background-color: grey;
+}
+
+.match-and-pass-container {
+    display: flex;
+}
+
+.pass-turn-button {
+    order: 1;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
 }

@@ -5,7 +5,6 @@ const playersValidateButton = document.querySelector(".players-validate-button")
 
 const gameUI = document.querySelector(".game-ui")
 const turnIndicator = document.querySelector(".turn-indicator-title")
-const gameOverTitle = document.querySelector(".game-over-title")
 const matchesIndicator = document.querySelector(".matches-left-para")
 const matchesContainer = document.querySelector(".matches-container")
 const matchesPickedPara = document.querySelector(".matches-picked-para")
@@ -73,7 +72,7 @@ function draw(element){
             matchesPickedPara.innerText = `You picked ${matchesAmmo} matches`
         break
         case "gameOver":
-            gameOverTitle.innerText = `Player ${playerNumber} lose`
+            turnIndicator.innerText = `Player ${playerNumber} lose`
         break
         default:
         break
@@ -83,21 +82,13 @@ function draw(element){
 function hide(ui){
     switch (ui){
         case "menu":
-            for(const child of menuUI.children){
-                child.style.display = "none"
-            }
-            for(const child of gameUI.children){
-                child.style.display = "flex"
-            }
+            menuUI.style.display = "none"
+            gameUI.style.display = "flex"
         break
 
         case "game":
-            for(const child of menuUI.children){
-                child.style.display = "flex"
-            }
-            for(const child of gameUI.children){
-                child.style.display = "none"
-            }
+            menuUI.style.display = "flex"
+            gameUI.style.display = "none"
         break
     }
 }

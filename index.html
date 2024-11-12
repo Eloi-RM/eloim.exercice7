@@ -15,16 +15,19 @@
         <div class="menu-ui">
             <p>Number of players :</p>
             <input class="input-players" type="number"/>
-            <button class="players-validate-button">Validate</button>
+            <button class="players-validate-button ui-button">Validate</button>
         </div>
         
         <div class="game-ui">   
-            <h1 class="turn-indicator-title">Player 0</h1>
-            <p class="matches-left-para">50 matches left</p>
-            <h2 class="game-over-title"></h2>
-            <p class="matches-picked-para"></p>
-            <div class="matches-container"></div>
-            <button class="pass-turn-button" disabled="true">Pass turn</button>
+            <div class="text-container">
+                <h1 class="turn-indicator-title">Player 0</h1>
+            <p class="matches-left-para">There is 50 matches left</p>
+            <p class="matches-picked-para">You picked 0 matches</p>
+            </div>
+            <div class="match-and-pass-container">
+                <button class="pass-turn-button ui-button" disabled="true">Pass turn</button>
+                <div class="matches-container"></div>
+            </div>
         </div> 
     </main>
     <footer></footer>

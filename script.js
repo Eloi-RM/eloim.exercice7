@@ -11,7 +11,7 @@ const matchesIndicator = document.querySelector(".matches-left-para")
 const validateButton = document.querySelector(".validate-button")
 const matchesContainer = document.querySelector(".matches-container")
 const matchesPickedPara = document.querySelector(".matches-picked-para")
-const
+const passTurnButton = document.querySelector(".pass-turn-button")
 //-----------------------
 
 const initialMatches = 50
@@ -50,15 +50,16 @@ function askPlayer(){
 function retractMatches(matches){
     totalMatches -= matches
     matchesAmmo ++
-    if (matchesAmmo == 6){
-        switchPlayer()
-        draw("turn")
-        matchesAmmo = 0
-    }
+    checkGameStatus()
     draw("matches")
+    update()
 }
 
-function checkWin(){
+function checkGameStatus(){
+    if (matchesAmmo == 6){
+        switchPlayer()
+        matchesAmmo = 0
+    }
     if (totalMatches <= 0){
         totalMatches = 0
         draw("gameOver")
@@ -72,6 +73,8 @@ function switchPlayer(){
     else{
         playerNumber = 1
     }
+    draw("turn")
+    update()
 }
 
 playersValidateButton.addEventListener('click', ()=>{
@@ -134,6 +137,19 @@ function matchesDisplay(){
     }
 }
 
-addEventListener
+passTurnButton.addEventListener('click', ()=>{
+    matchesAmmo = 0
+    draw("matches")
+    switchPlayer()
+})
 
+
+function update(){
+    if (matchesAmmo == 0){
+        passTurnButton.disabled = true
+    }
+    else{
+        passTurnButton.disabled = false
+    }
+}
 game()

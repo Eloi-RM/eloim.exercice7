@@ -6,9 +6,7 @@ const playersValidateButton = document.querySelector(".players-validate-button")
 const gameUI = document.querySelector(".game-ui")
 const turnIndicator = document.querySelector(".turn-indicator-title")
 const gameOverTitle = document.querySelector(".game-over-title")
-const inputField = document.querySelector(".input-matches")
 const matchesIndicator = document.querySelector(".matches-left-para")
-const validateButton = document.querySelector(".validate-button")
 const matchesContainer = document.querySelector(".matches-container")
 const matchesPickedPara = document.querySelector(".matches-picked-para")
 const passTurnButton = document.querySelector(".pass-turn-button")
@@ -21,31 +19,18 @@ let playerTotalNumber = 0
 
 let matchesAmmo = 0
 
-function game(){
+function init(){
     draw("turn")
     hide("game")
     matchesDisplay()
 }
 
-function gameloop(){
-    const pickedMatches = askPlayer()
-    retractMatches(pickedMatches)
-    checkWin()
-    draw("matches")
-    switchPlayer()
-    draw("turn")
-}
-
-validateButton.addEventListener('click', ()=>{
-    if (totalMatches > 0){
-        gameloop()
+playersValidateButton.addEventListener('click', ()=>{
+    playerTotalNumber = inputPlayers.value
+    if (playerTotalNumber > 1){
+        hide("menu")
     }
 })
-
-function askPlayer(){
-    const pickedMatches = inputField.value
-    return pickedMatches
-}
 
 function retractMatches(matches){
     totalMatches -= matches
@@ -63,6 +48,7 @@ function checkGameStatus(){
     if (totalMatches <= 0){
         totalMatches = 0
         draw("gameOver")
+        update()
     }
 }
 
@@ -77,15 +63,7 @@ function switchPlayer(){
     update()
 }
 
-playersValidateButton.addEventListener('click', ()=>{
-    playerTotalNumber = inputPlayers.value
-    if (playerTotalNumber > 1){
-        hide("menu")
-    }
-})
-
 function draw(element){
-
     switch (element){
         case "turn":
             turnIndicator.innerText = `Player ${playerNumber} turn :`
@@ -143,13 +121,13 @@ passTurnButton.addEventListener('click', ()=>{
     switchPlayer()
 })
 
-
 function update(){
-    if (matchesAmmo == 0){
+    if (matchesAmmo == 0 || totalMatches == 0){
         passTurnButton.disabled = true
     }
     else{
         passTurnButton.disabled = false
     }
 }
-game()
+
+init()

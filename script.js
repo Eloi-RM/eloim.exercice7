@@ -13,6 +13,7 @@ const passTurnButton = document.querySelector(".pass-turn-button")
 
 const initialMatches = 36
 let currentMatches = initialMatches
+
 let playerNumber = 1
 let numberOfPlayers = 0
 

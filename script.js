@@ -4,19 +4,19 @@ const inputPlayers = document.querySelector(".input-players")
 const playersValidateButton = document.querySelector(".players-validate-button")
 
 const gameUI = document.querySelector(".game-ui")
-const turnIndicator = document.querySelector(".turn-indicator-title")
-const matchesIndicator = document.querySelector(".matches-left-para")
+const turnIndicatorTitle = document.querySelector(".turn-indicator-title")
+const matchesIndicatorText = document.querySelector(".matches-left-text")
 const matchesContainer = document.querySelector(".matches-container")
-const matchesPickedPara = document.querySelector(".matches-picked-para")
+const matchesPickedText = document.querySelector(".matches-picked-text")
 const passTurnButton = document.querySelector(".pass-turn-button")
 //-----------------------
 
-const initialMatches = 50
-let totalMatches = initialMatches
+const initialMatches = 36
+let currentMatches = initialMatches
 let playerNumber = 1
-let playerTotalNumber = 0
+let numberOfPlayers = 0
 
-let matchesAmmo = 0
+let matchesPickedUp = 0
 
 function init(){
     draw("turn")
@@ -25,56 +25,69 @@ function init(){
 }
 
 playersValidateButton.addEventListener('click', ()=>{
-    playerTotalNumber = inputPlayers.value
-    if (playerTotalNumber > 1){
+    numberOfPlayers = inputPlayers.value
+    if (numberOfPlayers > 1){
         hide("menu")
     }
 })
 
 function retractMatches(matches){
-    totalMatches -= matches
-    matchesAmmo ++
+    currentMatches -= matches
+    matchesPickedUp ++
     checkGameStatus()
     draw("matches")
-    update()
+    enablePass()
 }
 
 function checkGameStatus(){
-    if (matchesAmmo == 6){
+    if (matchesPickedUp == 6){
         switchPlayer()
-        matchesAmmo = 0
+        matchesPickedUp = 0
     }
-    if (totalMatches <= 0){
-        totalMatches = 0
+    if (currentMatches <= 0){
+        currentMatches = 0
         draw("gameOver")
-        update()
+        enablePass()
     }
 }
 
 function switchPlayer(){
-    if (playerNumber<playerTotalNumber){
+    if (playerNumber < numberOfPlayers){
         playerNumber += 1
     }
     else{
         playerNumber = 1
     }
     draw("turn")
-    update()
+    enablePass()
+}
+
+passTurnButton.addEventListener('click', ()=>{
+    matchesPickedUp = 0
+    draw("matches")
+    switchPlayer()
+})
+
+function enablePass(){
+    if (matchesPickedUp == 0 || currentMatches == 0){
+        passTurnButton.disabled = true
+    }
+    else{
+        passTurnButton.disabled = false
+    }
 }
 
 function draw(element){
     switch (element){
         case "turn":
-            turnIndicator.innerText = `Player ${playerNumber} turn :`
+            turnIndicatorTitle.innerText = `Player ${playerNumber} turn :`
         break
         case "matches":
-            matchesIndicator.innerText = `There is ${totalMatches} matches left`
-            matchesPickedPara.innerText = `You picked ${matchesAmmo} matches`
+            matchesIndicatorText.innerText = `There is ${currentMatches} matches left`
+            matchesPickedText.innerText = `You picked ${matchesPickedUp} matches`
         break
         case "gameOver":
-            turnIndicator.innerText = `Player ${playerNumber} lose`
-        break
-        default:
+            turnIndicatorTitle.innerText = `Player ${playerNumber} lose`
         break
     }
 }
@@ -94,7 +107,7 @@ function hide(ui){
 }
 
 function matchesDisplay(){
-    for(let i = 0; i < 50; i++){
+    for(let i = 0; i < initialMatches; i++){
         const match = document.createElement("button")
         match.classList.add("match")
         match.innerHTML = '<img class="match-sprite" src="match_sprite.png"/>'
@@ -103,21 +116,6 @@ function matchesDisplay(){
             retractMatches(1)
         })
         matchesContainer.appendChild(match)
-    }
-}
-
-passTurnButton.addEventListener('click', ()=>{
-    matchesAmmo = 0
-    draw("matches")
-    switchPlayer()
-})
-
-function update(){
-    if (matchesAmmo == 0 || totalMatches == 0){
-        passTurnButton.disabled = true
-    }
-    else{
-        passTurnButton.disabled = false
     }
 }
 

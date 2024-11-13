@@ -31,6 +31,19 @@ playersValidateButton.addEventListener('click', ()=>{
     }
 })
 
+function matchesDisplay(){
+    for(let i = 0; i < initialMatches; i++){
+        const match = document.createElement("button")
+        match.classList.add("match")
+        match.innerHTML = '<img class="match-sprite" src="match_sprite.png"/>'
+        match.addEventListener('click', ()=>{
+            match.classList.add('picked')
+            retractMatches(1)
+        })
+        matchesContainer.appendChild(match)
+    }
+}
+
 function retractMatches(matches){
     currentMatches -= matches
     matchesPickedUp ++
@@ -103,19 +116,6 @@ function hide(ui){
             menuUI.style.display = "flex"
             gameUI.style.display = "none"
         break
-    }
-}
-
-function matchesDisplay(){
-    for(let i = 0; i < initialMatches; i++){
-        const match = document.createElement("button")
-        match.classList.add("match")
-        match.innerHTML = '<img class="match-sprite" src="match_sprite.png"/>'
-        match.addEventListener('click', ()=>{
-            match.classList.add('picked')
-            retractMatches(1)
-        })
-        matchesContainer.appendChild(match)
     }
 }
 
